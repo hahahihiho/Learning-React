@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Redux</title>
+</head>
+<body>
+    <h2 id="label">0</h2>
+    <div>
+        <button id="plusButton">+1</button>
+        <button id="minusButton">-1</button>
+        <button id="resetButton">reset</button>
+    </div>
+    <!-- redux -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js"></script>
+
+    <script>
+        // module area
+        // 5 단계로 구분 + component 부분 (subscribe)
+        // state | action | make action | reducer | make store 
+        
+        // 1. state- simple json object
+        // 다루고자 하는 데이터를 포함
+        const initialState = { number: 0, color: '#f60' };
+        
+        // 2. action (event)
+        const ACT_ADD = 'ACT_ADD';
+        const ACT_RESET = 'ACT_RESET';
+
+        // 3. action 생성 함수
+        const actionAddNum = (value) => ({type:ACT_ADD,diff:value});
+        const actionResetNum = () => ({type:ACT_RESET})
+
+        // 4. reducer
+        // 액션값이 ~일 때, 상태값을 ~로 변경한다는 명령 수행
+        const myCountReducer = (state =initialState, action=null) => {
+            console.log(action);
+
+            let numberValue = 0;
+            let colorValue = "#000";
+            
+            switch (action.type){
+                case ACT_ADD:   numberValue = state.number + action.diff; break;
+                case ACT_RESET: numberValue = 0; break;
+                default: return state;
+            }
+            if (numberValue >0){colorValue = '#2f77eb';}
+            else if (numberValue <0){colorValue = '#f60';}
+            else {colorValue = "#000"}
+            
+            return {number: numberValue, color: colorValue};
+        }
+        
+        // 5. store 생성 -> 상태값, action, reducer 함수가 포함된 객체 생성
+        const store = Redux.createStore(myCountReducer);
+
+        // Component area
+        // 6. subscribe - store 에 함수를 등록
+        store.subscribe(() => {
+            const state = store.getState(); // myCountReduder가 실행
+            document.getElementById('label').innerText = state.number;
+            document.getElementById('label').style.color = state.color;
+        });
+
+        document.getElementById('plusButton').addEventListener('click',function(){
+            // reducer호출
+            // action 함수가 리턴하는 json 객체는 reducer에게 action parmeter전달.
+            // state값은 최초 1회에는 외부에 정의한 기본값이 사용, 그이후는 저장값 활용
+            store.dispatch(actionAddNum(5));
+        })
+        document.getElementById('minusButton').addEventListener('click',function(){
+            store.dispatch(actionAddNum(-1));
+        })
+        document.getElementById('resetButton').addEventListener('click',function(){
+            store.dispatch(actionResetNum());
+        })
+    </script>
+    </body>
+    </html>

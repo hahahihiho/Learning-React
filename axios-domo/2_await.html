@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id='keyword'>
+    <button onclick="doConnect()">go</button>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function doConnect(){
+        
+        (async function() {
+            console.group('Ajax')
+            let params = {keyword:document.getElementById('keyword').value,page:1}
+            const headers = {}
+            try{
+                const response = await axios.get('http://itpaper.co.kr/demo/react/api/dept_list.php',{
+                    params: params,
+                    headers: headers
+                })
+                console.log(response)
+            }catch(e) {
+                console.log('error',e)
+            }
+            console.groupEnd('Ajax')
+        })() // 즉시실행 (funcion(){...})()
+
+    }
+</script>
+</html>

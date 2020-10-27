@@ -1,0 +1,4 @@
+yarn add 
+redux
+redux-actions
+redux-devtools-extension

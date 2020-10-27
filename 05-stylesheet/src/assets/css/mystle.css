@@ -1,0 +1,9 @@
+/* css 파일을 기준으로 상대경로 */
+
+.my-css-box {
+    background-image: url(../img/ryan.gif);
+    width:100px;
+    height:100px;
+    background-size: cover;
+    border: 5px solid #eee;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="keyword"/>
+    <button onclick="doConnect()">학과 검색</button>
+
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+function doConnect() {
+    const GROUP_NAME = 'AXIOS!!!'
+    console.group(GROUP_NAME)
+    let params = {keyword:document.getElementById('keyword').value,page:1}
+    let headers = {}
+    function success_func(response){
+        console.log('success')
+        console.log(response.data)
+    }
+    function catch_func(error){
+        console.log('fail')
+        console.log(error.response.status,error.response.data)
+    }
+    function finall_func(){
+        console.debug('load done')
+        console.groupEnd(GROUP_NAME)
+    }
+
+    axios.get('http://itpaper.co.kr/demo/react/api/dept_list.php',{
+        params: params,
+        // 인증 key 같은것
+        headers: headers
+    })
+    .then((response)=>{success_func(response)})
+    .catch((error)=>{catch_func(error)})
+    .finally(()=>{finall_func()})
+}
+</script>
+</html>

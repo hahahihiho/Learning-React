@@ -1,0 +1,26 @@
+//  반복등장하는 구문들 묶음 = mixin => js 함수
+// 파라미터 정의가능
+// 간단한 사칙연산, 조건분기 가능
+
+@mixin myMixin($size){
+    $calc: 100px;
+    @if $size % 2 == 0{
+        $calc: $calc + 50px;
+    } @else if $size % 3 == 0 {
+        $calc: $calc + 100px;
+    } @else {
+        $calc: $calc;
+    }
+
+    width: $calc;
+    height: 32px*2;
+    transition: all 0.3s ease-in;
+
+    // 가상 class 는 &기호 사용
+    &:hover {
+        transform: scale(1.2,1.2);
+    }
+}
+
+// 사용법
+// .hello {@include myMixin(3)}

@@ -1,0 +1,9 @@
+yarn add react-router-dom
+yarn add qs
+yarn add node-sass
+yarn add styled-components
+yarn add react-helmet
+yarn add react-bootstrap
+yarn add bootstrap@3
+
+yarn add jquery

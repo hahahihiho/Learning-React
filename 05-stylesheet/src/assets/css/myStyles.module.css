@@ -1,0 +1,30 @@
+/**
+* css 파일을 기준으로 상대경로 
+* '*.module.css' 형식으로 작성되는 CSS는 클래스 이름이 JS 변수화 되기 때문에 카멜 표기법을 사용해야함
+* id 속성 접근 사용불가
+*/ 
+ 
+.myCssBox {
+    background-image: url(../img/ryan.gif);
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    border: 5px solid #eee;
+}
+
+/* js의 import 에 명시한 참조변수에 속하지 않는 독립 클래스 */
+:global .myBorderBox {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+}
+
+.size{
+    width: 100px;
+    height: 100px;
+}
+
+.bg {
+    background-color: aliceblue;
+    border: 1px solid black;
+}
